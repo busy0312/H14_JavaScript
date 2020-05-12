@@ -22,24 +22,63 @@ html= html+"<tr><td>5/9/2020</td><td>austin</td><td>tx</td><td>us</td><td>circle
 // append the new row into the table
 d3.select('tbody').html(html)
 
+////////////////////////////////////////////////////////////////////////////////
+
 const form = d3.select("#form");
 const button= d3.select('.btn')
 // Create event handlers for pressing the enter key
-form.on('submit',runEnter);
+form.on("submit",runEnter);
 button.on('click',runEnter);
 
 // Create the function to run for the event
 function runEnter() {
 // Prevent the page from refreshing when I hit enter
 d3.event.preventDefault();
+
 // select the input element 
-const inputElement = d3.select(".form-control");
+const inputDate = d3.select("#datetime");
+const inputCity = d3.select("#city");
+const inputState = d3.select("#state");
+const inputCountry = d3.select('#country');
+const inputShape = d3.select('#shape');
 // Get the value property of the input element
-const inputValue = inputElement.property("value");
+const valueDate = inputDate.property("value");
+const valueCity = inputCity.property("value");
+const valueState = inputState.property('value');
+const valueCountry = inputCountry.property('value');
+const valueShape = inputShape.property('value');
 
 
 
-const filteredData = tableData.filter(tableData=> tableData.datetime === inputValue)
+
+// var filter = {
+//     datetime:valueDate,
+//     city:valueCity,
+//     state:valueState,
+//     country:valueCountry,
+//     shape:valueShape
+//   };
+
+
+// users= tableData.filter(function(item) {
+//     for (var key in filter) {
+//       if (item[key] === undefined || item[key] != filter[key])
+//         return false;
+//     }
+//     return true;
+//   });
+
+// console.log(users)
+
+// const filteredData = tableData.filter(tableData=> tableData.datetime === inputValue)
+
+
+const filteredData =  tableData.filter(function(filter) {
+    return ((filter.datetime===valueDate || filter.city ===valueCity 
+        || filter.state===valueState || filter.country===valueCountry || filter.shape===valueShape ));
+  })
+  
+
 
 console.log(filteredData)
 
